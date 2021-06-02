@@ -3,15 +3,26 @@ import './App.css';
 
 import tasks from './sample/tasks.json';
 
+// Components
+import Tasks from './components/Tasks';
+import TaskForm from './components/TaskForm';
+
 class App extends Component {
 
   state = {
     tasks: tasks
   }
 
+  addTask = (title, description) => {
+    this.setState({
+      tasks: [...this.state.tasks, { title, description, id: this.state.tasks.length }]
+    });
+  }
+
   render(){
     return <div>
-      { this.state.tasks.map(e => <h1>{e.title}</h1>) }
+      <TaskForm addTask={this.addTask}></TaskForm>
+      <Tasks tasks={this.state.tasks} />
     </div>
   }
 }
